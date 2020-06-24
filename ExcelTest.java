@@ -1,14 +1,4 @@
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
- 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
- 
-import java.awt.Desktop;
-import java.util.Vector;
+
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -16,10 +6,17 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
- 
- 
-public class ExcelImport {
+import org.apache.poi.xssf.usermodel.XSSFWorkbook; 
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.awt.Desktop;
+import java.util.Vector;
+public class ExcelTest {
 	
 	public void readExcel(String filePath,String sheetName,Vector<String> v) throws Exception {
 		System.setProperty("webdriver.chrome.driver",
@@ -32,7 +29,6 @@ public class ExcelImport {
 		System.out.println("No.of Test Cases :"+ rowCount);
 		CellStyle greencolor  = tsWb.createCellStyle();
 		greencolor.setFillForegroundColor(IndexedColors.GREEN.getIndex());
- 
 		CellStyle redcolor  = tsWb.createCellStyle();
 		redcolor.setFillForegroundColor(IndexedColors.RED.getIndex());
 		for(int i= 1 ; i<= rowCount ; i++) {
@@ -46,7 +42,6 @@ public class ExcelImport {
 			 String baseurl = "http://localhost/Covid19_Registry_Form.html";
 			 driver.get(baseurl);
 			 WebElement pid = null,fname = null,testm=null,lname=null,res=null,dob=null,street1=null,city1=null,state1=null,sod=null,street2=null,city2=null,state2=null,labdir=null,pdate=null,spe=null,submit=null;
-			 //Select tmethod = null;
 			 try {
 				 pid = driver.findElement(By.id("pid"));
 			 }catch(Exception e) {
@@ -131,12 +126,6 @@ public class ExcelImport {
 				 System.out.println("webelement exception");
 				 e.printStackTrace();
 			 }
-//			 try{
-//				 tmethod = new Select(driver.findElement(By.id("testm")));
-//			 }catch(Exception e) {
-//				 System.out.println("webelement exception");
-//				 e.printStackTrace();
-//			 }
 			 try{
 				pdate = driver.findElement(By.id("dop"));
 			 }catch(Exception e) {
@@ -199,8 +188,6 @@ public class ExcelImport {
 				 j++;
 				 if(row.getCell(j) != null) {
 					 res.sendKeys(row.getCell(j).getStringCellValue());
-//					 WebElement res = driver.findElement(By.id(row.getCell(j).getStringCellValue()));
-//					 res.click();
 				 }
 				 j++;
 				 if(row.getCell(j) != null) {
@@ -271,7 +258,7 @@ public class ExcelImport {
 		String path = "C:/Users/sseth/eclipse-workspace/TestWordpressLogin/src/TestCases.xlsx";
 		String sheetname = "Sheet1";
 		Vector<String> v = new Vector<String>();
-		ExcelImport e = new ExcelImport();
+		ExcelTest e = new ExcelTest();
 		try {
 			e.readExcel(path,sheetname,v);
 		}
